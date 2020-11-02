@@ -28,6 +28,6 @@ df_ags['Insgesamt'] = pd.to_numeric(df_ags['Insgesamt'], errors='coerce')
 
 
 # %%
-df2 = pd.pivot_table(df, columns='IdLandkreis', index='Datenstand', values='infektionen_neu', aggfunc='sum' )
-
-print ('Success')
+#df2 = pd.pivot_table(df, columns='IdLandkreis', index='Datenstand', values='infektionen_neu', aggfunc='sum' )
+print (df['AnzahlFall'].sum() )
+# %%
