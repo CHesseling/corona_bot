@@ -6,30 +6,22 @@ import datetime
 import requests
 import locale
 locale.setlocale(locale.LC_ALL, 'de_DE.UTF-8') 
+import tweepy
+from tweepy import OAuthHandler
+import os
 
 
 
-pd.set_option('display.max_rows', 100)
-pd.set_option('display.max_columns', 100)
-pd.set_option('display.width', None)
-pd.set_option('display.max_colwidth', -1)
+access_token = os.environ['access_token']
+access_secret = os.environ['access_secret']
+consumer_key = os.environ['consumer_key']
+consumer_secret = os.environ['consumer_secret']
 
 #%%
 def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
     now = datetime.datetime.now()
     current_time = now.strftime("%d.%m.%Y %H:%M:%S")
-    """
-    Call in a loop to create terminal progress bar
-    @params:
-        iteration   - Required  : current iteration (Int)
-        total       - Required  : total iterations (Int)
-        prefix      - Optional  : prefix string (Str)
-        suffix      - Optional  : suffix string (Str)
-        decimals    - Optional  : positive number of decimals in percent complete (Int)
-        length      - Optional  : character length of bar (Int)
-        fill        - Optional  : bar fill character (Str)
-        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
-    """
+
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + '-' * (length - filledLength)
@@ -40,16 +32,21 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
 
 df = pd.read_excel('https://storage.googleapis.com/ndrdata-impfungen/rki_data/rki_impfquotenmonitoring_latest.xlsx', sheet_name=1)
 
-
-#%%
 impfungen = df[(df['Bundesland'] == 'Gesamt')].iloc[0,1]
-
 bev = 83166711
-
 impfquote = impfungen / bev * 100
-#%%
+text2 = '{} von 83 Mio. Impfungen'.format(int(impfungen))
+
 string = printProgressBar(impfquote, 100, prefix = 'Impffortschritt Deutschland:', suffix = 'komplett (Erstimpfung)', length = 40)
 
-print (string)
+tweettext = string + " - " + text2
+print (tweettext)
 
-#%%
+
+
+#%% Tweet
+
+auth = OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_secret)
+api = tweepy.API(auth)
+api.update_status(status=tweettext)
