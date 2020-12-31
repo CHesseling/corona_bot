@@ -30,14 +30,14 @@ auth.set_access_token(access_token, access_secret)
 api = tweepy.API(auth)
 
 #%%
-def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
+def printProgressBar (iteration, total, impfungen, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
     now = datetime.datetime.now()
     current_time = now.strftime("%d.%m.%Y %H:%M:%S")
 
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + '-' * (length - filledLength)
-    pro_string = f'\r{prefix} |{bar}| {percent}% {suffix} {current_time}'
+    pro_string = f'\r{prefix} |{bar}| {percent}% {suffix}. {int(impfungen)} von 83 Mio. - {current_time}'
     return pro_string
 
 #%%
@@ -49,9 +49,9 @@ bev = 83166711
 impfquote = impfungen / bev * 100
 text2 = '{} von 83 Mio.'.format(int(impfungen))
 
-string = printProgressBar(impfquote, 100, prefix = 'Impffortschritt Deutschland:', suffix = 'komplett (Erstimpfung)', length = 40)
+string = printProgressBar(impfquote, 100, impfungen, prefix = 'Impffortschritt Deutschland:', suffix = 'komplett (Erstimpfung)', length = 40)
 
-tweettext = string + " - " + text2
+tweettext = string 
 print (tweettext)
 
 
@@ -59,4 +59,4 @@ print (tweettext)
 #%% Tweet
 
 
-#api.update_status(status=tweettext)
+api.update_status(status=tweettext)
