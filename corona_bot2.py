@@ -3,9 +3,6 @@
 #%%
 import pandas as pd
 import datetime 
-import requests
-import locale
-locale.setlocale(locale.LC_ALL, 'de_DE.UTF-8') 
 import tweepy
 from tweepy import OAuthHandler
 import os
