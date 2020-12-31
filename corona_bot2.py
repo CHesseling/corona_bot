@@ -12,10 +12,12 @@ import os
 
 
 
-access_token = os.environ['access_token']
-access_secret = os.environ['access_secret']
-consumer_key = os.environ['consumer_key']
-consumer_secret = os.environ['consumer_secret']
+access_token = os.getenv['ACCESS_KEY']
+access_secret = os.getenv['ACCESS_SECRET']
+consumer_key = os.getenv['CONSUMER_KEY']
+consumer_secret = os.getenv['CONSUMER_SECRET']
+
+print ('TEST', access_token)
 
 #%%
 def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
