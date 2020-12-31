@@ -12,12 +12,24 @@ import os
 
 
 
-access_token = os.getenv['ACCESS_KEY']
-access_secret = os.getenv['ACCESS_SECRET']
-consumer_key = os.getenv['CONSUMER_KEY']
-consumer_secret = os.getenv['CONSUMER_SECRET']
+parser = argparse.ArgumentParser(description="Does some awesome things.")
+parser.add_argument('--twitter_access_secret', type=str, help="pass a message into the script")
+parser.add_argument('--twitter_access_token', type=str, help="pass a message into the script")
+parser.add_argument('--twitter_consumer_key', type=str, help="pass a message into the script")
+parser.add_argument('--twitter_consumer_secret', type=str, help="pass a message into the script")
 
-print ('TEST', access_token)
+args = parser.parse_args()
+print ("Test", args.twitter_consumer_key)
+
+consumer_key = args.twitter_consumer_key
+consumer_secret = args.twitter_consumer_secret
+access_token = args.twitter_access_token
+access_secret = args.twitter_access_secret
+
+auth = OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_secret)
+
+api = tweepy.API(auth)
 
 #%%
 def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
@@ -48,7 +60,5 @@ print (tweettext)
 
 #%% Tweet
 
-auth = OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_secret)
-api = tweepy.API(auth)
+
 api.update_status(status=tweettext)
