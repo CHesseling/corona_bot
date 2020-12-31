@@ -47,7 +47,7 @@ df = pd.read_excel('https://storage.googleapis.com/ndrdata-impfungen/rki_data/rk
 impfungen = df[(df['Bundesland'] == 'Gesamt')].iloc[0,1]
 bev = 83166711
 impfquote = impfungen / bev * 100
-text2 = '{} von 83 Mio. Impfungen'.format(int(impfungen))
+text2 = '{} von 83 Mio.'.format(int(impfungen))
 
 string = printProgressBar(impfquote, 100, prefix = 'Impffortschritt Deutschland:', suffix = 'komplett (Erstimpfung)', length = 40)
 
@@ -59,4 +59,4 @@ print (tweettext)
 #%% Tweet
 
 
-api.update_status(status=tweettext)
+#api.update_status(status=tweettext)
