@@ -42,7 +42,7 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
 
 #%%
 
-df = pd.read_excel('https://storage.googleapis.com/ndrdata-impfungen/rki_data/rki_impfquotenmonitoring_latest.xlsx', sheet_name=1)
+df = pd.read_excel('https://storage.googleapis.com/ndrdata-impfungen/rki_data/rki_impfquotenmonitoring_latest.xlsx', sheet_name=1, engine='openpyxl')
 
 impfungen = df[(df['Bundesland'] == 'Gesamt')].iloc[0,1]
 bev = 83166711
