@@ -44,10 +44,13 @@ def printProgressBar (iteration, total, impfungen, prefix = '', suffix = '', dec
 
 df = pd.read_excel('https://storage.googleapis.com/ndrdata-impfungen/rki_data/rki_impfquotenmonitoring_latest.xlsx', sheet_name=1, engine='openpyxl')
 
-impfungen = df[(df['Bundesland'] == 'Gesamt')].iloc[0,2]
+impfungen = df[(df['Bundesland'] == 'Gesamt')].iloc[0,3]
 bev = 83166711
 impfquote = impfungen / bev * 100
 text2 = '{} von 83 Mio.'.format(int(impfungen))
+
+
+#%%
 
 string = printProgressBar(impfquote, 100, impfungen, prefix = 'Impffortschritt Deutschland:', suffix = 'komplett (Erstimpfung)', length = 40)
 
