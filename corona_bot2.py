@@ -8,7 +8,7 @@ from tweepy import OAuthHandler
 import os
 import argparse
 
-
+#%%
 
 parser = argparse.ArgumentParser(description="Does some awesome things.")
 parser.add_argument('--twitter_access_secret', type=str, help="pass a message into the script")
@@ -44,11 +44,12 @@ def printProgressBar (iteration, total, impfungen, prefix = '', suffix = '', dec
 
 df = pd.read_excel('https://storage.googleapis.com/ndrdata-impfungen/rki_data/rki_impfquotenmonitoring_latest.xlsx', sheet_name=1, engine='openpyxl')
 
-impfungen = df[(df['Bundesland'] == 'Gesamt')].iloc[0,3]
+impfungen = df[(df['Bundesland'] == 'Gesamt')].iloc[0,2]
 bev = 83166711
 impfquote = impfungen / bev * 100
 text2 = '{} von 83 Mio.'.format(int(impfungen))
 
+#%%
 
 #%%
 
